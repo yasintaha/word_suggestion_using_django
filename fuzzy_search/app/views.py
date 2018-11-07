@@ -13,7 +13,6 @@ class SuggestionView(APIView):
 		res = []
 		if query:
 			with open('app/word_search.tsv') as tsvfile:
-
 			  reader = csv.reader(tsvfile, delimiter='\t')
 			  list_of_words = [row[0] for row in reader]
 			  result = process.extract(query, list_of_words, limit=25)
@@ -29,4 +28,5 @@ class SearchView(APIView):
 		if query:
 		  result = process.extract(query, world, limit=25)
 		  res = [{"value":word, "match":match} for word, match in result]
+
 		return JsonResponse(res, safe=False)
